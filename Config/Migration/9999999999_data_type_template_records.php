@@ -66,7 +66,7 @@ class DataTypeTemplateRecords extends NetCommonsMigration {
 			array('language_id' => '2', 'key' => 'modified_user', 'data_type_key' => 'text', 'plugin_key' => '', 'name' => '更新者', 'weight' => '4', 'is_systemized' => '1', 'is_input' => '0', 'is_user_defined' => '0', ),
 			array('language_id' => '2', 'key' => 'username', 'data_type_key' => 'text', 'plugin_key' => 'users', 'name' => 'ログインID', 'weight' => '5', 'is_systemized' => '1', 'is_input' => '1', 'is_user_defined' => '1', ),
 			array('language_id' => '2', 'key' => 'password', 'data_type_key' => 'password', 'plugin_key' => 'users', 'name' => 'パスワード', 'weight' => '6', 'is_systemized' => '1', 'is_input' => '1', 'is_user_defined' => '1', ),
-			array('language_id' => '2', 'key' => 'handle', 'data_type_key' => 'text', 'plugin_key' => 'users', 'name' => 'ハンドル', 'weight' => '7', 'is_systemized' => '1', 'is_input' => '1', 'is_user_defined' => '1', ),
+			array('language_id' => '2', 'key' => 'nickname', 'data_type_key' => 'text', 'plugin_key' => 'users', 'name' => 'ハンドル', 'weight' => '7', 'is_systemized' => '1', 'is_input' => '1', 'is_user_defined' => '1', ),
 			array('language_id' => '2', 'key' => 'name', 'data_type_key' => 'text', 'plugin_key' => 'users', 'name' => '氏名', 'weight' => '8', 'is_systemized' => '1', 'is_input' => '1', 'is_user_defined' => '1', ),
 			array('language_id' => '2', 'key' => 'identifier', 'data_type_key' => 'text', 'plugin_key' => 'users', 'name' => 'リンク識別子', 'weight' => '9', 'is_systemized' => '1', 'is_input' => '1', 'is_user_defined' => '1', ),
 			array('language_id' => '2', 'key' => 'role_key', 'data_type_key' => 'select', 'plugin_key' => 'users', 'name' => '権限', 'weight' => '10', 'is_systemized' => '1', 'is_input' => '1', 'is_user_defined' => '1', ),
