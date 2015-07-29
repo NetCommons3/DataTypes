@@ -30,7 +30,7 @@ class DataTypeFormHelper extends FormHelper {
  *
  * @var array
  */
-	public static $dataTypes;
+	public $dataTypes;
 
 /**
  * Default Constructor
@@ -61,7 +61,7 @@ class DataTypeFormHelper extends FormHelper {
 			'conditions' => $conditions,
 			'order' => array('is_user_defined' => 'asc', 'weight' => 'asc')
 		);
-		self::$dataTypes = $this->DataTypeTemplate->find('list', $options);
+		$this->dataTypes = $this->DataTypeTemplate->find('list', $options);
 	}
 
 /**
@@ -75,7 +75,7 @@ class DataTypeFormHelper extends FormHelper {
 	public function selectDataTypes($fieldName, $attributes = array()) {
 		$options = Hash::merge(array(
 			'type' => 'select',
-			'options' => self::$dataTypes
+			'options' => $this->dataTypes
 		), $attributes);
 		return $this->Form->input($fieldName, $options);
 	}
