@@ -19,13 +19,6 @@ App::uses('DataTypesAppModel', 'DataTypes.Model');
 class DataTypeChoice extends DataTypesAppModel {
 
 /**
- * Use database config
- *
- * @var string
- */
-	public $useDbConfig = 'master';
-
-/**
  * Validation rules
  *
  * @var array
@@ -132,7 +125,7 @@ class DataTypeChoice extends DataTypesAppModel {
  */
 	public $belongsTo = array(
 		'Language' => array(
-			'className' => 'Language',
+			'className' => 'M17n.Language',
 			'foreignKey' => 'language_id',
 			'conditions' => '',
 			'fields' => '',
