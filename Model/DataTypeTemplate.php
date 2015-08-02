@@ -19,13 +19,6 @@ App::uses('DataTypesAppModel', 'DataTypes.Model');
 class DataTypeTemplate extends DataTypesAppModel {
 
 /**
- * Use database config
- *
- * @var string
- */
-	public $useDbConfig = 'master';
-
-/**
  * Validation rules
  *
  * @var array
