@@ -48,6 +48,8 @@ class DataTypeFormHelper extends FormHelper {
 		);
 		if (isset($settings['plugin'])) {
 			$conditions['DataTypeTemplatesPlugin.plugin_key'] = $settings['plugin'];
+		} else {
+			$conditions['DataTypeTemplatesPlugin.plugin_key'] = $View->request->params['plugin'];
 		}
 
 		$options = array(
