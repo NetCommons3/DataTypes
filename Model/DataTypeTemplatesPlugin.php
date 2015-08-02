@@ -45,4 +45,21 @@ class DataTypeTemplatesPlugin extends DataTypesAppModel {
 			),
 		),
 	);
+
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'DataTypeTemplate' => array(
+			'className' => 'DataTypes.DataTypeTemplate',
+			'foreignKey' => false,
+			'conditions' => 'DataTypeTemplatesPlugin.data_type_template_key = DataTypeTemplate.key',
+			'fields' => '',
+			'order' => ''
+		),
+	);
 }

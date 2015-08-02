@@ -41,27 +41,23 @@ class DataTypeFormHelper extends FormHelper {
 	public function __construct(View $View, $settings = array()) {
 		parent::__construct($View, $settings);
 
-		$this->DataTypeTemplate = ClassRegistry::init('DataTypes.DataTypeTemplate');
+		$this->DataTypeTemplatesPlugin = ClassRegistry::init('DataTypes.DataTypeTemplatesPlugin');
 
 		$conditions = array(
-			'language_id' => Configure::read('Config.languageId')
+			'DataTypeTemplate.language_id' => Configure::read('Config.languageId')
 		);
 		if (isset($settings['plugin'])) {
-			$conditions['OR'] = array(
-				'plugin_key' => $settings['plugin'],
-				'is_user_defined' => false
-			);
-		} else {
-			$conditions['is_user_defined'] = false;
+			$conditions['DataTypeTemplatesPlugin.plugin_key'] = $settings['plugin'];
 		}
 
 		$options = array(
-			'recursive' => -1,
+			'recursive' => 0,
 			'fields' => array('DataTypeTemplate.key', 'DataTypeTemplate.name'),
 			'conditions' => $conditions,
-			'order' => array('is_user_defined' => 'asc', 'weight' => 'asc')
+			'order' => array('DataTypeTemplate.weight' => 'asc')
 		);
-		$this->dataTypes = $this->DataTypeTemplate->find('list', $options);
+
+		$this->dataTypes = $this->DataTypeTemplatesPlugin->find('list', $options);
 	}
 
 /**
