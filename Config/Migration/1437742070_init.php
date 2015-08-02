@@ -105,7 +105,7 @@ class Init extends CakeMigration {
 		),
 		'down' => array(
 			'drop_table' => array(
-				'data_type_choices', 'data_type_templates', 'data_types'
+				'data_type_choices', 'data_type_templates', 'data_type_templates_plugins', 'data_types'
 			),
 		),
 	);
