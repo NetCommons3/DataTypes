@@ -49,4 +49,12 @@ class DataTypeTemplatesPluginTest extends CakeTestCase {
 		parent::tearDown();
 	}
 
+/**
+ * Expect get method
+ *
+ * @return void
+ */
+	public function testGet() {
+	}
+
 }
