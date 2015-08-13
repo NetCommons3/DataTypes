@@ -8,4 +8,4 @@ DataTypes for NetComomns3
 
 | dependencies  | status |
 | ------------- | ------ |
-| composer.json | [![Dependency Status](https://www.versioneye.com/user/projects/(versioneye_project_ID)/badge.png)](https://www.versioneye.com/user/projects/(versioneye_project_ID)) |
+| composer.json | [![Dependency Status](https://www.versioneye.com/user/projects/55cc389649163d000d000472/badge.png)](https://www.versioneye.com/user/projects/55cc389649163d000d000472) |
