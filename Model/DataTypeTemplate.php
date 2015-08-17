@@ -132,4 +132,44 @@ class DataTypeTemplate extends DataTypesAppModel {
 			'order' => ''
 		)
 	);
+
+/**
+ * Get room method.
+ *
+ * @param string $key data_type_templates.key
+ * @return array DataTypeTemplate data
+ */
+	public function getDataTypeTemplateByKey($key) {
+		$this->DataTypeChoice = ClassRegistry::init('DataTypes.DataTypeChoice');
+
+		$dataTypeTemplate = $this->find('all', array(
+			'recursive' => -1,
+			'fields' => array(
+				$this->alias . '.*',
+				$this->DataTypeChoice->alias . '.*',
+			),
+			'conditions' => array(
+				$this->alias . '.key' => $key,
+				$this->alias . '.language_id' => Configure::read('Config.languageId')
+			),
+			'joins' => array(
+				array(
+					'table' => $this->DataTypeChoice->table,
+					'alias' => $this->DataTypeChoice->alias,
+					'type' => 'LEFT',
+					'conditions' => array(
+						$this->alias . '.key' . ' = ' . $this->DataTypeChoice->alias . ' .data_type_template_key',
+						$this->alias . '.language_id' . ' = ' . $this->DataTypeChoice->alias . ' .language_id',
+						//$this->alias . '.language_id' => Configure::read('Config.languageId')
+					),
+				),
+			),
+			'order' => array(
+				$this->DataTypeChoice->alias . '.weight' => 'asc',
+			)
+		));
+
+		return $dataTypeTemplate[0];
+	}
+
 }
