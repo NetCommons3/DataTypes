@@ -123,7 +123,14 @@ class DataTypeFormHelper extends FormHelper {
 						'type' => $dataTypeKey,
 						'label' => $inputLabel,
 						'class' => 'form-control',
+						'error' => false,
 					), $attributes));
+				$html .= '</div>';
+
+				$html .= '<div class="has-error">';
+				$html .= $this->Form->error($fieldName, null, array(
+						'class' => 'help-block'
+					));
 				$html .= '</div>';
 
 				$html .= '<div class="data-type-password data-type-again">';
@@ -132,9 +139,16 @@ class DataTypeFormHelper extends FormHelper {
 						'type' => $dataTypeKey,
 						'label' => __d('data_types', 'Re-enter'),
 						'class' => 'form-control',
+						'error' => false,
 					), $attributes));
 
 				$html .= '</div>';
+				$html .= '<div class="has-error">';
+				$html .= $this->Form->error($fieldName . '_again', null, array(
+						'class' => 'help-block'
+					));
+				$html .= '</div>';
+
 				break;
 
 			case 'datetime':
@@ -157,7 +171,13 @@ class DataTypeFormHelper extends FormHelper {
 					'type' => $dataTypeKey,
 					'label' => $inputLabel,
 					'class' => 'form-control',
+					'error' => false,
 				), $attributes));
+				$html .= '<div class="has-error">';
+				$html .= $this->Form->error($fieldName, null, array(
+						'class' => 'help-block'
+					));
+				$html .= '</div>';
 		}
 
 		return $html;
