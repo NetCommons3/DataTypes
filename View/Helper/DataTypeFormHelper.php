@@ -157,6 +157,12 @@ class DataTypeFormHelper extends FormHelper {
 
 			case 'img':
 				$html .= $this->Form->label($fieldName, $inputLabel);
+				$html .= '<div class="thumbnail">';
+				$html .= $this->Html->image($attributes['noimage'], array(
+						'class' => 'img-responsive img-rounded',
+						'alt' => 'Avatar',
+					));
+				$html .= '</div>';
 				break;
 
 			case 'label':
