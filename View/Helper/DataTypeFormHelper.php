@@ -53,7 +53,7 @@ class DataTypeFormHelper extends FormHelper {
 			$conditions = array(
 				'DataTypeTemplate.language_id' => Configure::read('Config.languageId')
 			);
-			if (isset($settings['plugin'])) {
+			if (isset($this->settings['plugin'])) {
 				$conditions['DataTypeTemplatesPlugin.plugin_key'] = $this->settings['plugin'];
 			} else {
 				$conditions['DataTypeTemplatesPlugin.plugin_key'] = $this->_View->request->params['plugin'];
@@ -82,6 +82,7 @@ class DataTypeFormHelper extends FormHelper {
  * @param string $inputLabel Label tag value
  * @param array $attributes The HTML attributes of the select element.
  * @return string Completed form widget.
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function inputDataType($dataTypeTemplateKey, $fieldName, $inputLabel, $attributes = array()) {
 		static $dataTypeTemplates = array();
@@ -102,15 +103,11 @@ class DataTypeFormHelper extends FormHelper {
 
 		switch ($dataTypeKey) {
 			case 'radio':
-				$html .= $this->Form->label($fieldName, $inputLabel);
-				$html .= '<div class="form-control data-type-no-border">';
-				$html .= '</div>';
+				$html .= $this->__radio($fieldName, $inputLabel, $attributes);
 				break;
 
 			case 'checkbox':
-				$html .= $this->Form->label($fieldName, $inputLabel);
-				$html .= '<div class="form-control data-type-no-border">';
-				$html .= '</div>';
+				$html .= $this->__checkbox($fieldName, $inputLabel, $attributes);
 				break;
 
 			//case 'select':
@@ -118,51 +115,15 @@ class DataTypeFormHelper extends FormHelper {
 			//	break;
 
 			case 'password':
-				$html .= '<div class="data-type-password">';
-				$html .= $this->Form->input($fieldName, Hash::merge(array(
-						'type' => $dataTypeKey,
-						'label' => $inputLabel,
-						'class' => 'form-control',
-						'error' => false,
-					), $attributes));
-				$html .= '</div>';
-
-				$html .= '<div class="has-error">';
-				$html .= $this->Form->error($fieldName, null, array(
-						'class' => 'help-block'
-					));
-				$html .= '</div>';
-
-				$html .= '<div class="data-type-password data-type-again">';
-
-				$html .= $this->Form->input($fieldName . '_again', Hash::merge(array(
-						'type' => $dataTypeKey,
-						'label' => __d('data_types', 'Re-enter'),
-						'class' => 'form-control',
-						'error' => false,
-					), $attributes));
-
-				$html .= '</div>';
-				$html .= '<div class="has-error">';
-				$html .= $this->Form->error($fieldName . '_again', null, array(
-						'class' => 'help-block'
-					));
-				$html .= '</div>';
-
+				$html .= $this->__password($fieldName, $inputLabel, $attributes);
 				break;
 
 			case 'datetime':
-				$html .= $this->Form->label($fieldName, $inputLabel);
+				$html .= $this->__datetime($fieldName, $inputLabel, $attributes);
 				break;
 
 			case 'img':
-				$html .= $this->Form->label($fieldName, $inputLabel);
-				$html .= '<div class="thumbnail">';
-				$html .= $this->Html->image($attributes['noimage'], array(
-						'class' => 'img-responsive img-rounded',
-						'alt' => 'Avatar',
-					));
-				$html .= '</div>';
+				$html .= $this->__img($fieldName, $inputLabel, $attributes);
 				break;
 
 			case 'label':
@@ -185,6 +146,130 @@ class DataTypeFormHelper extends FormHelper {
 					));
 				$html .= '</div>';
 		}
+
+		return $html;
+	}
+
+/**
+ * Generates a form input element complete with label and wrapper div
+ *
+ * @param string $fieldName This should be "Modelname.fieldname"
+ * @param string $inputLabel Label tag value
+ * @param array $attributes The HTML attributes of the select element.
+ * @return string Completed form widget.
+ */
+	private function __checkbox($fieldName, $inputLabel, $attributes = array()) {
+		$html = '';
+		$html .= $this->Form->label($fieldName, $inputLabel);
+		$html .= '<div class="form-control data-type-no-border">';
+		$html .= '</div>';
+
+		//Dummy
+		$attributes = $attributes;
+		return $html;
+	}
+
+/**
+ * Generates a form input element complete with label and wrapper div
+ *
+ * @param string $fieldName This should be "Modelname.fieldname"
+ * @param string $inputLabel Label tag value
+ * @param array $attributes The HTML attributes of the select element.
+ * @return string Completed form widget.
+ */
+	private function __radio($fieldName, $inputLabel, $attributes = array()) {
+		$html = '';
+
+		$html .= $this->Form->label($fieldName, $inputLabel);
+		$html .= '<div class="form-control data-type-no-border">';
+		$html .= '</div>';
+
+		//Dummy
+		$attributes = $attributes;
+		return $html;
+	}
+
+/**
+ * Generates a form input element complete with label and wrapper div
+ *
+ * @param string $fieldName This should be "Modelname.fieldname"
+ * @param string $inputLabel Label tag value
+ * @param array $attributes The HTML attributes of the select element.
+ * @return string Completed form widget.
+ */
+	private function __password($fieldName, $inputLabel, $attributes = array()) {
+		$html = '';
+
+		$html .= '<div class="data-type-password">';
+		$html .= $this->Form->input($fieldName, Hash::merge(array(
+				'type' => $dataTypeKey,
+				'label' => $inputLabel,
+				'class' => 'form-control',
+				'error' => false,
+			), $attributes));
+		$html .= '</div>';
+
+		$html .= '<div class="has-error">';
+		$html .= $this->Form->error($fieldName, null, array(
+				'class' => 'help-block'
+			));
+		$html .= '</div>';
+
+		$html .= '<div class="data-type-password data-type-again">';
+
+		$html .= $this->Form->input($fieldName . '_again', Hash::merge(array(
+				'type' => $dataTypeKey,
+				'label' => __d('data_types', 'Re-enter'),
+				'class' => 'form-control',
+				'error' => false,
+			), $attributes));
+
+		$html .= '</div>';
+		$html .= '<div class="has-error">';
+		$html .= $this->Form->error($fieldName . '_again', null, array(
+				'class' => 'help-block'
+			));
+		$html .= '</div>';
+
+		return $html;
+	}
+
+/**
+ * Generates a form input element complete with label and wrapper div
+ *
+ * @param string $fieldName This should be "Modelname.fieldname"
+ * @param string $inputLabel Label tag value
+ * @param array $attributes The HTML attributes of the select element.
+ * @return string Completed form widget.
+ */
+	private function __datetime($fieldName, $inputLabel, $attributes = array()) {
+		$html = '';
+
+		$html .= $this->Form->label($fieldName, $inputLabel);
+
+		//Dummy
+		$attributes = $attributes;
+		return $html;
+	}
+
+/**
+ * Generates a form input element complete with label and wrapper div
+ *
+ * @param string $fieldName This should be "Modelname.fieldname"
+ * @param string $inputLabel Label tag value
+ * @param array $attributes The HTML attributes of the select element.
+ * @return string Completed form widget.
+ */
+	private function __img($fieldName, $inputLabel, $attributes = array()) {
+		$html = '';
+
+		$html .= $this->Form->label($fieldName, $inputLabel);
+		$html .= '<div class="thumbnail">';
+		$html .= $this->Html->image($attributes['noimage'], array(
+				'class' => 'img-responsive img-rounded',
+				'alt' => 'Avatar',
+			));
+		$html .= '</div>';
 
 		return $html;
 	}
