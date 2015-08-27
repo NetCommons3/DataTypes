@@ -202,7 +202,7 @@ class DataTypeFormHelper extends FormHelper {
 
 		$html .= '<div class="data-type-password">';
 		$html .= $this->Form->input($fieldName, Hash::merge(array(
-				'type' => $dataTypeKey,
+				'type' => 'password',
 				'label' => $inputLabel,
 				'class' => 'form-control',
 				'error' => false,
@@ -218,7 +218,7 @@ class DataTypeFormHelper extends FormHelper {
 		$html .= '<div class="data-type-password data-type-again">';
 
 		$html .= $this->Form->input($fieldName . '_again', Hash::merge(array(
-				'type' => $dataTypeKey,
+				'type' => 'password',
 				'label' => __d('data_types', 'Re-enter'),
 				'class' => 'form-control',
 				'error' => false,
