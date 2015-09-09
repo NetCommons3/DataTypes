@@ -25,8 +25,8 @@ class DataTypeTemplatesPlugin extends DataTypesAppModel {
  */
 	public $validate = array(
 		'data_type_template_key' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			'notBlank' => array(
+				'rule' => array('notBlank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -35,8 +35,8 @@ class DataTypeTemplatesPlugin extends DataTypesAppModel {
 			),
 		),
 		'plugin_key' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			'notBlank' => array(
+				'rule' => array('notBlank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

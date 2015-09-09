@@ -35,8 +35,8 @@ class DataTypeTemplate extends DataTypesAppModel {
 			),
 		),
 		'key' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			'notBlank' => array(
+				'rule' => array('notBlank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -45,8 +45,8 @@ class DataTypeTemplate extends DataTypesAppModel {
 			),
 		),
 		'data_type_key' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			'notBlank' => array(
+				'rule' => array('notBlank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -55,8 +55,8 @@ class DataTypeTemplate extends DataTypesAppModel {
 			),
 		),
 		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
+			'notBlank' => array(
+				'rule' => array('notBlank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
