@@ -130,7 +130,7 @@ class DataTypeTemplate extends DataTypesAppModel {
 			),
 			'conditions' => array(
 				$this->alias . '.key' => $key,
-				$this->alias . '.language_id' => Configure::read('Config.languageId')
+				$this->alias . '.language_id' => Current::read('Language.id')
 			),
 			'joins' => array(
 				array(
@@ -140,7 +140,7 @@ class DataTypeTemplate extends DataTypesAppModel {
 					'conditions' => array(
 						$this->alias . '.key' . ' = ' . $this->DataTypeChoice->alias . ' .data_type_template_key',
 						$this->alias . '.language_id' . ' = ' . $this->DataTypeChoice->alias . ' .language_id',
-						//$this->alias . '.language_id' => Configure::read('Config.languageId')
+						//$this->alias . '.language_id' => Current::read('Language.id')
 					),
 				),
 			),

@@ -51,7 +51,7 @@ class DataTypeFormHelper extends FormHelper {
 		static $dataTypes = null;
 		if (! isset($dataTypes)) {
 			$conditions = array(
-				'DataTypeTemplate.language_id' => Configure::read('Config.languageId')
+				'DataTypeTemplate.language_id' => Current::read('Language.id')
 			);
 			if (isset($this->settings['plugin'])) {
 				$conditions['DataTypeTemplatesPlugin.plugin_key'] = $this->settings['plugin'];
