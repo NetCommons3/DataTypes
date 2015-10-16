@@ -2,15 +2,13 @@
 /**
  * DataTypeFixture
  *
- * @author Noriko Arai <arai@nii.ac.jp>
- * @author Shohei Nakajima <nakajimashouhei@gmail.com>
- * @link http://www.netcommons.org NetCommons Project
- * @license http://www.netcommons.org/license.txt NetCommons License
- * @copyright Copyright 2014, NetCommons Project
+* @author Jun Nishikawa <topaz2@m0n0m0n0.com>
+* @link http://www.netcommons.org NetCommons Project
+* @license http://www.netcommons.org/license.txt NetCommons License
  */
 
 /**
- * DataTypeFixture
+ * Summary for DataTypeFixture
  */
 class DataTypeFixture extends CakeTestFixture {
 
@@ -25,11 +23,10 @@ class DataTypeFixture extends CakeTestFixture {
 		'key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'weight' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'comment' => 'Display order.'),
-		'is_systemized' => array('type' => 'boolean', 'null' => false, 'default' => null, 'comment' => '0: normalized, 1: systemized'),
-		'created_user' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-		'created' => array('type' => 'datetime', 'null' => false, 'default' => null),
-		'modified_user' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
+		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
+		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1)
 		),
@@ -48,11 +45,10 @@ class DataTypeFixture extends CakeTestFixture {
 			'key' => 'Lorem ipsum dolor sit amet',
 			'name' => 'Lorem ipsum dolor sit amet',
 			'weight' => 1,
-			'is_systemized' => 1,
 			'created_user' => 1,
-			'created' => '2015-07-24 12:50:31',
+			'created' => '2015-10-16 07:40:45',
 			'modified_user' => 1,
-			'modified' => '2015-07-24 12:50:31'
+			'modified' => '2015-10-16 07:40:45'
 		),
 	);
 
