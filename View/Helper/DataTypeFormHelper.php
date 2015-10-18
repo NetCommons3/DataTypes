@@ -23,8 +23,10 @@ class DataTypeFormHelper extends AppHelper {
  *
  * @var array
  */
-	public $helpers = array('Form', 'Html');
-//
+	public $helpers = array(
+		'NetCommons.NetCommonsForm'
+	);
+
 ///**
 // * Default Constructor
 // *
@@ -47,32 +49,14 @@ class DataTypeFormHelper extends AppHelper {
  * @return string Formatted SELECT element
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#options-for-select-checkbox-and-radio-inputs
  */
-//	public function selectDataTypes($fieldName, $attributes = array()) {
-//		static $dataTypes = null;
-//		if (! isset($dataTypes)) {
-//			$conditions = array(
-//				'DataTypeTemplate.language_id' => Current::read('Language.id')
-//			);
-//			if (isset($this->settings['plugin'])) {
-//				$conditions['DataTypeTemplatesPlugin.plugin_key'] = $this->settings['plugin'];
-//			} else {
-//				$conditions['DataTypeTemplatesPlugin.plugin_key'] = $this->_View->request->params['plugin'];
-//			}
-//			$options = array(
-//				'recursive' => 0,
-//				'fields' => array('DataTypeTemplate.key', 'DataTypeTemplate.name'),
-//				'conditions' => $conditions,
-//				'order' => array('DataTypeTemplate.weight' => 'asc')
-//			);
-//			$dataTypes = $this->DataTypeTemplatesPlugin->find('list', $options);
-//		}
-//
-//		$options = Hash::merge(array(
-//			'type' => 'select',
-//			'options' => $dataTypes
-//		), $attributes);
-//		return $this->Form->input($fieldName, $options);
-//	}
+	public function selectDataTypes($fieldName, $attributes = array()) {
+		$dataTypes = Hash::combine($this->_View->viewVars['dataTypes'], '{s}.DataType.key', '{s}.DataType.name');
+		$options = Hash::merge(array(
+			'type' => 'select',
+			'options' => $dataTypes
+		), $attributes);
+		return $this->NetCommonsForm->input($fieldName, $options);
+	}
 
 /**
  * Generates a form input element complete with label and wrapper div

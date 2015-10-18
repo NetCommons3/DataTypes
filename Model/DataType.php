@@ -72,4 +72,45 @@ class DataType extends DataTypesAppModel {
 			'order' => ''
 		)
 	);
+
+/**
+ * データタイプを取得
+ *
+ * @param array $dataTypeKey DataType.keyの配列
+ * @return array DataTypes配列
+ */
+	public function getDataTypes($dataTypeKey = array()) {
+		$this->DataTypeChoice = ClassRegistry::init('DataTypes.DataTypeChoice');
+
+		//データ取得
+		$dataTypes = $this->find('all', array(
+			'recursive' => -1,
+			'conditions' => array(
+				$this->alias . '.language_id' => Current::read('Language.id'),
+				$this->alias . '.key' => $dataTypeKey
+			),
+		));
+		$dataTypes = Hash::combine($dataTypes, '{n}.' . $this->alias . '.key', '{n}');
+
+		//データ取得
+		$dataTypeChoices = $this->DataTypeChoice->find('all', array(
+			'recursive' => -1,
+			'conditions' => array(
+				$this->DataTypeChoice->alias . '.language_id' => Current::read('Language.id'),
+				$this->DataTypeChoice->alias . '.data_type_key' => $dataTypeKey
+			),
+		));
+		$dataTypeChoices = Hash::combine(
+			$dataTypeChoices,
+			'{n}.' . $this->DataTypeChoice->alias . '.id',
+			'{n}.' . $this->DataTypeChoice->alias,
+			'{n}.' . $this->DataTypeChoice->alias . '.data_type_key'
+		);
+		foreach ($dataTypeChoices as $key => $choices) {
+			$dataTypes[$key][$this->DataTypeChoice->alias] = $choices;
+		}
+
+		return $dataTypes;
+	}
+
 }

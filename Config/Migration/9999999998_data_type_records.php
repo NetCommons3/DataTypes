@@ -58,6 +58,7 @@ class DataTypeRecords extends NetCommonsMigration {
 			array('language_id' => '2', 'key' => 'datetime', 'name' => '日時', 'weight' => '14', ),
 			array('language_id' => '2', 'key' => 'wysiwyg', 'name' => 'WYSIWYG', 'weight' => '15', ),
 			array('language_id' => '2', 'key' => 'refecture', 'name' => '都道府県', 'weight' => '16', ),
+			array('language_id' => '2', 'key' => 'timezone', 'name' => 'タイムゾーン', 'weight' => '17', ),
 			//英語
 			array('language_id' => '1', 'key' => 'label', 'name' => 'Label', 'weight' => '1', ),
 			array('language_id' => '1', 'key' => 'text', 'name' => 'Text', 'weight' => '2', ),
@@ -75,6 +76,7 @@ class DataTypeRecords extends NetCommonsMigration {
 			array('language_id' => '1', 'key' => 'datetime', 'name' => 'Date time', 'weight' => '14', ),
 			array('language_id' => '1', 'key' => 'wysiwyg', 'name' => 'WYSIWYG', 'weight' => '15', ),
 			array('language_id' => '1', 'key' => 'refecture', 'name' => 'Refecture', 'weight' => '16', ),
+			array('language_id' => '1', 'key' => 'timezone', 'name' => 'Time zone', 'weight' => '17', ),
 		),
 	);
 
