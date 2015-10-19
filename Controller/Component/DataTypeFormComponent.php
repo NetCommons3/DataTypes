@@ -33,13 +33,12 @@ class DataTypeFormComponent extends Component {
 	);
 
 /**
- * Called after the Controller::beforeFilter() and before the controller action
+ * beforeRender
  *
- * @param Controller $controller Controller with components to startup
+ * @param Controller $controller Controller
  * @return void
- * @link http://book.cakephp.org/2.0/en/controllers/components.html#Component::startup
  */
-	public function startup(Controller $controller) {
+	public function beforeRender(Controller $controller) {
 		$this->controller = $controller;
 		$this->controller->helpers[] = 'DataTypes.DataTypeForm';
 
