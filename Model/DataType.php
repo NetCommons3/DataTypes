@@ -19,42 +19,35 @@ App::uses('DataTypesAppModel', 'DataTypes.Model');
 class DataType extends DataTypesAppModel {
 
 /**
+ * データタイプキー
+ *
+ * @var int
+ */
+	const
+		DATA_TYPE_LABEL = 'label',
+		DATA_TYPE_TEXT = 'text',
+		DATA_TYPE_TEXTAREA = 'textarea',
+		DATA_TYPE_RADIO = 'radio',
+		DATA_TYPE_CHECKBOX = 'checkbox',
+		DATA_TYPE_SELECT = 'select',
+		DATA_TYPE_MULTIPLE_SELECT = 'multiple_select',
+		DATA_TYPE_PASSWORD = 'password',
+		DATA_TYPE_EMAIL = 'email',
+		DATA_TYPE_IMG = 'img',
+		DATA_TYPE_FILE = 'file',
+		DATA_TYPE_DATE = 'date',
+		DATA_TYPE_TIME = 'time',
+		DATA_TYPE_DATETIME = 'datetime',
+		DATA_TYPE_WYSIWYG = 'wysiwyg',
+		DATA_TYPE_REFECTURE = 'refecture',
+		DATA_TYPE_TIMEZONE = 'timezone';
+
+/**
  * Validation rules
  *
  * @var array
  */
-	public $validate = array(
-		'language_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'key' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'name' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
+	public $validate = array();
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -72,6 +65,44 @@ class DataType extends DataTypesAppModel {
 			'order' => ''
 		)
 	);
+
+/**
+ * Called during validation operations, before validation. Please note that custom
+ * validation rules can be defined in $validate.
+ *
+ * @param array $options Options passed from Model::save().
+ * @return bool True if validate operation should continue, false to abort
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate
+ * @see Model::save()
+ */
+	public function beforeValidate($options = array()) {
+		$this->validate = Hash::merge($this->validate, array(
+			'language_id' => array(
+				'numeric' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'allowEmpty' => false,
+					'required' => true,
+				),
+			),
+			'key' => array(
+				'notBlank' => array(
+					'rule' => array('notBlank'),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => true,
+				),
+			),
+			'name' => array(
+				'notBlank' => array(
+					'rule' => array('notBlank'),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => true,
+				),
+			),
+		));
+
+		return parent::beforeValidate($options);
+	}
 
 /**
  * データタイプを取得
