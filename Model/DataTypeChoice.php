@@ -15,8 +15,20 @@ App::uses('DataTypesAppModel', 'DataTypes.Model');
 
 /**
  * DataTypeChoice Model
+ *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @package NetCommons\DataTypes\Model
  */
 class DataTypeChoice extends DataTypesAppModel {
+
+/**
+ * use behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		'DataTypes.Timezone'
+	);
 
 /**
  * Validation rules

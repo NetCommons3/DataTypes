@@ -12,10 +12,10 @@
 App::uses('AppModel', 'Model');
 
 /**
- * UserManagerApp Model
+ * DataTypesApp Model
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
- * @package NetCommons\DataType\Controller
+ * @package NetCommons\DataTypes\Model
  */
 class DataTypesAppModel extends AppModel {
 

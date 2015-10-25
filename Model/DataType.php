@@ -15,6 +15,9 @@ App::uses('DataTypesAppModel', 'DataTypes.Model');
 
 /**
  * DataType Model
+ *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @package NetCommons\DataTypes\Model
  */
 class DataType extends DataTypesAppModel {
 
@@ -111,7 +114,9 @@ class DataType extends DataTypesAppModel {
  * @return array DataTypes配列
  */
 	public function getDataTypes($dataTypeKey = array()) {
-		$this->DataTypeChoice = ClassRegistry::init('DataTypes.DataTypeChoice');
+		$this->loadModels([
+			'DataTypeChoice' => 'DataTypes.DataTypeChoice',
+		]);
 
 		//データ取得
 		$dataTypes = $this->find('all', array(
@@ -141,6 +146,9 @@ class DataType extends DataTypesAppModel {
 			$dataTypes[$key][$this->DataTypeChoice->alias] = $choices;
 		}
 
+		if (isset($dataTypes[self::DATA_TYPE_TIMEZONE])) {
+			$dataTypes[self::DATA_TYPE_TIMEZONE][$this->DataTypeChoice->alias] = $this->DataTypeChoice->getTimezone();
+		}
 		return $dataTypes;
 	}
 
