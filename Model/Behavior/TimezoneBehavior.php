@@ -25,8 +25,7 @@ class TimezoneBehavior extends ModelBehavior {
  * @param Model $model Model ビヘイビア呼び出し元モデル
  * @param string $what タイムゾーン(地域)
  * @param string $country 2文字のISO3166-1互換の国コード
- * @return bool True on success
- * @throws InternalErrorException
+ * @return array タイムゾーン配列
  */
 	public function getTimezone(Model $model, $what = null, $country = null) {
 		$results = array();

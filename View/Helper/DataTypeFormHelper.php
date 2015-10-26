@@ -24,7 +24,6 @@ class DataTypeFormHelper extends AppHelper {
  * @var array
  */
 	public $helpers = array(
-		'Form',
 		'NetCommons.NetCommonsForm',
 		'NetCommons.NetCommonsHtml',
 	);
@@ -48,14 +47,13 @@ class DataTypeFormHelper extends AppHelper {
 	}
 
 /**
- * Generates a form input element complete with label and wrapper div
+ * データタイプに対するinputタグのHTML出力
  *
- * @param string $dataTypeTemplateKey data_type_templates.key
- * @param string $fieldName This should be "Modelname.fieldname"
- * @param string $inputLabel Label tag value
- * @param array $attributes The HTML attributes of the select element.
+ * @param string $dataTypeKey データタイプキー
+ * @param string $fieldName フィールド名("Modelname.fieldname"形式)
+ * @param string $inputLabel inputラベル名
+ * @param array $attributes HTMLタグ属性
  * @return string Completed form widget.
- * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function inputDataType($dataTypeKey, $fieldName, $inputLabel, $attributes = array()) {
 		$output = '';
@@ -63,7 +61,7 @@ class DataTypeFormHelper extends AppHelper {
 		switch ($dataTypeKey) {
 			case 'radio':
 				$options = $attributes['options'];
-				unset($attributes['options']) ;
+				unset($attributes['options']);
 
 				$output .= '<div>';
 				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
@@ -75,23 +73,14 @@ class DataTypeFormHelper extends AppHelper {
 					'separator' => '<span class="radio-separator"></span>'
 				), $attributes));
 				$output .= '</div>';
+				$output .= '<div class="has-error">';
+				$output .= $this->NetCommonsForm->error($fieldName, null, Hash::merge(array('class' => 'help-block'), $options));
+				$output .= '</div>';
 				break;
-
-			//case 'checkbox':
-			//	$output .= $this->__checkbox($fieldName, $inputLabel, $attributes);
-			//	break;
-
-			//case 'select':
-			//	$output .= '<strong>' . $inputLabel . '</strong>';
-			//	break;
 
 			case 'password':
 				$output .= $this->password($fieldName, $inputLabel, $attributes);
 				break;
-
-			//case 'datetime':
-			//	$output .= $this->__datetime($fieldName, $inputLabel, $attributes);
-			//	break;
 
 			case 'img':
 				$output .= $this->image($fieldName, $inputLabel, $attributes);
@@ -115,48 +104,9 @@ class DataTypeFormHelper extends AppHelper {
 	}
 
 /**
- * Generates a form input element complete with label and wrapper div
- *
- * @param string $fieldName This should be "Modelname.fieldname"
- * @param string $inputLabel Label tag value
- * @param array $attributes The HTML attributes of the select element.
- * @return string Completed form widget.
- */
-//	private function __checkbox($fieldName, $inputLabel, $attributes = array()) {
-//		$output = '';
-//		$output .= $this->Form->label($fieldName, $inputLabel);
-//		$output .= '<div class="form-control data-type-no-border">';
-//		$output .= '</div>';
-//
-//		//Dummy
-//		$attributes = $attributes;
-//		return $output;
-//	}
-
-/**
- * Generates a form input element complete with label and wrapper div
- *
- * @param string $fieldName This should be "Modelname.fieldname"
- * @param string $inputLabel Label tag value
- * @param array $attributes The HTML attributes of the select element.
- * @return string Completed form widget.
- */
-//	private function __radio($fieldName, $inputLabel, $attributes = array()) {
-//		$output = '';
-//
-//		$output .= $this->Form->label($fieldName, $inputLabel);
-//		$output .= '<div class="form-control data-type-no-border">';
-//		$output .= '</div>';
-//
-//		//Dummy
-//		$attributes = $attributes;
-//		return $output;
-//	}
-
-/**
  * パスワードのHTMLタグの出力
  *
- * @param string $fieldName フィールド名
+ * @param string $fieldName フィールド名("Modelname.fieldname"形式)
  * @param string $inputLabel ラベル名
  * @param array $attributes HTMLタグ属性
  * @return string パスワードタグ
@@ -193,10 +143,10 @@ class DataTypeFormHelper extends AppHelper {
 /**
  * Generates a form input element complete with label and wrapper div
  *
- * @param string $fieldName This should be "Modelname.fieldname"
- * @param string $inputLabel Label tag value
- * @param array $attributes The HTML attributes of the select element.
- * @return string Completed form widget.
+ * @param string $fieldName フィールド名("Modelname.fieldname"形式)
+ * @param string $inputLabel ラベル名
+ * @param array $attributes HTMLタグ属性
+ * @return string imageタグ
  */
 	public function image($fieldName, $inputLabel, $attributes = array()) {
 		$output = '';
