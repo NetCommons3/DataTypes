@@ -9,7 +9,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('DataTypeTemplatesPlugin', 'DataTypes.Model');
+App::uses('DataType', 'DataTypes.Model');
 
 /**
  * Summary for DataTypeTemplatesPlugin Test Case
@@ -17,7 +17,7 @@ App::uses('DataTypeTemplatesPlugin', 'DataTypes.Model');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\DataType\Test\Case\Model
  */
-class DataTypeTemplatesPluginTest extends CakeTestCase {
+class DataTypeTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -25,7 +25,7 @@ class DataTypeTemplatesPluginTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'plugin.data_types.data_type_templates_plugin',
+		'plugin.data_types.data_type',
 	);
 
 /**
@@ -35,7 +35,7 @@ class DataTypeTemplatesPluginTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->DataTypeTemplatesPlugin = ClassRegistry::init('DataTypes.DataTypeTemplatesPlugin');
+		$this->DataType = ClassRegistry::init('DataTypes.DataType');
 	}
 
 /**
@@ -44,7 +44,7 @@ class DataTypeTemplatesPluginTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->DataTypeTemplatesPlugin);
+		unset($this->DataType);
 
 		parent::tearDown();
 	}
