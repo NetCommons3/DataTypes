@@ -83,7 +83,7 @@ class DataTypeFormHelper extends AppHelper {
 				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
 				$output .= '</div>';
 
-				$output .= '<div class="form-control nc-no-border">';
+				$output .= '<div class="form-control nc-data-label">';
 				$output .= $this->NetCommonsForm->radio($fieldName, $options, Hash::merge(array(
 					'div' => array('class' => 'form-control form-inline'),
 					'separator' => '<span class="radio-separator"></span>'
@@ -104,7 +104,7 @@ class DataTypeFormHelper extends AppHelper {
 
 			case 'label':
 				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
-				$output .= '<div class="form-control nc-no-border">';
+				$output .= '<div class="form-control nc-data-label">';
 				$output .= Hash::get($this->_View->request->data, $fieldName);
 				$output .= '</div>';
 				break;
