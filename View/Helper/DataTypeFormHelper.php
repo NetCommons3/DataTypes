@@ -29,6 +29,22 @@ class DataTypeFormHelper extends AppHelper {
 	);
 
 /**
+ * After render file callback.
+ * Called after any view fragment is rendered.
+ *
+ * Overridden in subclasses.
+ *
+ * @param string $viewFile The file just be rendered.
+ * @param string $content The content that was rendered.
+ * @return void
+ */
+	public function afterRenderFile($viewFile, $content) {
+		$content = $this->NetCommonsHtml->css('/data_types/css/style.css') . $content;
+
+		parent::afterRenderFile($viewFile, $content);
+	}
+
+/**
  * データタイプの選択リスト
  *
  * @param string $fieldName フィールド名
@@ -67,7 +83,7 @@ class DataTypeFormHelper extends AppHelper {
 				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
 				$output .= '</div>';
 
-				$output .= '<div class="form-control data-type-no-border">';
+				$output .= '<div class="form-control nc-data-label">';
 				$output .= $this->NetCommonsForm->radio($fieldName, $options, Hash::merge(array(
 					'div' => array('class' => 'form-control form-inline'),
 					'separator' => '<span class="radio-separator"></span>'
@@ -88,7 +104,7 @@ class DataTypeFormHelper extends AppHelper {
 
 			case 'label':
 				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
-				$output .= '<div class="form-control data-type-no-border">';
+				$output .= '<div class="form-control nc-data-label">';
 				$output .= Hash::get($this->_View->request->data, $fieldName);
 				$output .= '</div>';
 				break;
