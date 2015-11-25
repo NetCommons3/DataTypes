@@ -167,13 +167,20 @@ class DataTypeFormHelper extends AppHelper {
 	public function image($fieldName, $inputLabel, $attributes = array()) {
 		$output = '';
 
+		if (! isset($attributes['url'])) {
+			return $output;
+		}
+
 		$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
 		$output .= '<div class="thumbnail">';
-		$output .= $this->NetCommonsHtml->image($attributes['noimage'], array(
-				'class' => 'img-responsive img-rounded',
-				'alt' => 'Avatar',
-			));
+
+		$output .= $this->NetCommonsHtml->image($attributes['url'], array(
+			'class' => 'img-responsive img-rounded',
+			'alt' => Hash::get($attributes, 'alt'),
+		));
+
 		$output .= '</div>';
+		$output .= $this->NetCommonsForm->uploadFile($fieldName, array('label' => false));
 
 		return $output;
 	}
