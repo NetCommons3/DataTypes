@@ -167,6 +167,10 @@ class DataTypeFormHelper extends AppHelper {
 	public function image($fieldName, $inputLabel, $attributes = array()) {
 		$output = '';
 
+		if (! isset($attributes['url'])) {
+			return $output;
+		}
+
 		$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
 		$output .= '<div class="thumbnail">';
 
