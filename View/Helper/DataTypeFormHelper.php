@@ -172,7 +172,7 @@ class DataTypeFormHelper extends AppHelper {
 		}
 
 		$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
-		$output .= '<div class="thumbnail">';
+		$output .= '<div class="thumbnail data-type-edit-thumbnail">';
 
 		$output .= $this->NetCommonsHtml->image($attributes['url'], array(
 			'class' => 'img-responsive img-rounded',
@@ -180,7 +180,9 @@ class DataTypeFormHelper extends AppHelper {
 		));
 
 		$output .= '</div>';
-		$output .= $this->NetCommonsForm->uploadFile($fieldName, array('label' => false));
+		$output .= $this->NetCommonsForm->uploadFile($fieldName, Hash::merge(array(
+			'label' => false,
+		), $attributes));
 
 		return $output;
 	}
