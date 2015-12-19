@@ -12,6 +12,10 @@
 .data-type-again {
 	margin-top: 5px;
 }
+
 .data-type-edit-thumbnail {
 	margin-bottom: 10px;
+}
+.data-type-thumbnail img {
+	max-height: 180px;
 }
