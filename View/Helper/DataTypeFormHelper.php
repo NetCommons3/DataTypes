@@ -29,19 +29,17 @@ class DataTypeFormHelper extends AppHelper {
 	);
 
 /**
- * After render file callback.
- * Called after any view fragment is rendered.
+ * Before render callback. beforeRender is called before the view file is rendered.
  *
  * Overridden in subclasses.
  *
- * @param string $viewFile The file just be rendered.
- * @param string $content The content that was rendered.
+ * @param string $viewFile The view file that is going to be rendered
  * @return void
  */
-	public function afterRenderFile($viewFile, $content) {
-		$content = $this->NetCommonsHtml->css('/data_types/css/style.css') . $content;
-
-		parent::afterRenderFile($viewFile, $content);
+	public function beforeRender($viewFile) {
+		$this->NetCommonsHtml->css('/data_types/css/style.css');
+		$this->NetCommonsHtml->script('/data_types/js/data_types.jquery.js');
+		parent::beforeRender($viewFile);
 	}
 
 /**
@@ -172,16 +170,18 @@ class DataTypeFormHelper extends AppHelper {
 		}
 
 		$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
-		$output .= '<div class="thumbnail data-type-edit-thumbnail">';
+		$output .= '<div class="thumbnail data-type-thumbnail data-type-edit-thumbnail">';
 
 		$output .= $this->NetCommonsHtml->image($attributes['url'], array(
 			'class' => 'img-responsive img-rounded',
 			'alt' => Hash::get($attributes, 'alt'),
+			'id' => $this->domId($fieldName . '_image')
 		));
 
 		$output .= '</div>';
 		$output .= $this->NetCommonsForm->uploadFile($fieldName, Hash::merge(array(
 			'label' => false,
+			'data-type-key' => 'image',
 		), $attributes));
 
 		return $output;
