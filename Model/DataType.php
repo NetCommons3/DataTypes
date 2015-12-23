@@ -42,7 +42,7 @@ class DataType extends DataTypesAppModel {
 		DATA_TYPE_TIME = 'time',
 		DATA_TYPE_DATETIME = 'datetime',
 		DATA_TYPE_WYSIWYG = 'wysiwyg',
-		DATA_TYPE_REFECTURE = 'refecture',
+		DATA_TYPE_PREFECTURE = 'prefecture',
 		DATA_TYPE_TIMEZONE = 'timezone';
 
 /**
