@@ -1,6 +1,6 @@
 <?php
 /**
- * DataTypesApp Controller
+ * DataTypeFormComponentのテスト用Controller
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -12,12 +12,12 @@
 App::uses('AppController', 'Controller');
 
 /**
- * DataTypesApp Controller
+ * DataTypeFormComponentのテスト用Controller
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
- * @package NetCommons\DataTypes\Controller
+ * @package NetCommons\DataTypes\Test\test_app\Plugin\TestDataTypes\Controller
  */
-class DataTypesAppController extends AppController {
+class TestDataTypeFormComponentSettingsController extends AppController {
 
 /**
  * use component
@@ -25,6 +25,16 @@ class DataTypesAppController extends AppController {
  * @var array
  */
 	public $components = array(
-		'Security'
+		'DataTypes.DataTypeForm' => array('dataTypes' =>
+			array('textarea', 'email', 'wysiwyg', 'prefecture')
+		),
 	);
+
+/**
+ * index
+ *
+ * @return void
+ **/
+	public function index() {
+	}
 }

@@ -24,17 +24,17 @@ class DataTypeChoiceFixture extends CakeTestFixture {
 		'language_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 5, 'unsigned' => true),
 		'key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'data_type_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'data_type_template_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'code' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'weight' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'comment' => 'Display order.'),
-		'created_user' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-		'created' => array('type' => 'datetime', 'null' => false, 'default' => null),
-		'modified_user' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
+		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
+		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
 		),
-		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB'),
 	);
 
 /**
@@ -48,8 +48,8 @@ class DataTypeChoiceFixture extends CakeTestFixture {
 			'language_id' => 1,
 			'key' => 'Lorem ipsum dolor sit amet',
 			'data_type_key' => 'Lorem ipsum dolor sit amet',
-			'data_type_template_key' => 'Lorem ipsum dolor sit amet',
 			'name' => 'Lorem ipsum dolor sit amet',
+			'code' => 'Lorem ipsum dolor sit amet',
 			'weight' => 1,
 			'created_user' => 1,
 			'created' => '2015-07-24 12:49:56',

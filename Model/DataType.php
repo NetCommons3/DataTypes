@@ -84,22 +84,30 @@ class DataType extends DataTypesAppModel {
 				'numeric' => array(
 					'rule' => array('numeric'),
 					'message' => __d('net_commons', 'Invalid request.'),
-					'allowEmpty' => false,
-					'required' => true,
+					//'allowEmpty' => false,
+					//'required' => true,
 				),
 			),
 			'key' => array(
 				'notBlank' => array(
 					'rule' => array('notBlank'),
 					'message' => __d('net_commons', 'Invalid request.'),
-					'required' => true,
+					//'required' => true,
 				),
 			),
 			'name' => array(
 				'notBlank' => array(
 					'rule' => array('notBlank'),
 					'message' => __d('net_commons', 'Invalid request.'),
-					'required' => true,
+					//'required' => true,
+				),
+			),
+			'weight' => array(
+				'numeric' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+					//'allowEmpty' => false,
+					'required' => false,
 				),
 			),
 		));
@@ -149,6 +157,7 @@ class DataType extends DataTypesAppModel {
 		if (isset($dataTypes[self::DATA_TYPE_TIMEZONE])) {
 			$dataTypes[self::DATA_TYPE_TIMEZONE][$this->DataTypeChoice->alias] = $this->DataTypeChoice->getTimezone();
 		}
+
 		return $dataTypes;
 	}
 

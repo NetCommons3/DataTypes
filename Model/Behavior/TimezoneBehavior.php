@@ -30,13 +30,13 @@ class TimezoneBehavior extends ModelBehavior {
 	public function getTimezone(Model $model, $what = null, $country = null) {
 		$results = array();
 
-		if (! isset($what)) {
-			if (! isset($country)) {
-				$what = DateTimeZone::ALL;
-			} else {
-				$what = DateTimeZone::PER_COUNTRY;
-			}
+		if (isset($country)) {
+			$what = DateTimeZone::PER_COUNTRY;
 		}
+		if (! isset($what)) {
+			$what = DateTimeZone::ALL;
+		}
+
 		$timezoneIdentifiers = DateTimeZone::listIdentifiers($what, $country);
 		foreach ($timezoneIdentifiers as $timezone) {
 			$results[] = array(
