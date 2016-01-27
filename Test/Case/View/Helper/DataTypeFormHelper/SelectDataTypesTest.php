@@ -1,6 +1,6 @@
 <?php
 /**
- * DataTypeFormHelper::index()のテスト
+ * DataTypeFormHelper::selectDataTypes()のテスト
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -10,9 +10,10 @@
  */
 
 App::uses('NetCommonsHelperTestCase', 'NetCommons.TestSuite');
+App::uses('DataType4testFixture', 'DataTypes.Test/Fixture');
 
 /**
- * DataTypeFormHelper::index()のテスト
+ * DataTypeFormHelper::selectDataTypes()のテスト
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\DataTypes\Test\Case\View\Helper\DataTypeForm
@@ -24,10 +25,7 @@ class DataTypesDataTypeFormHelperSelectDataTypesTest extends NetCommonsHelperTes
  *
  * @var array
  */
-	public $fixtures = array(
-		'plugin.data_types.data_type',
-		'plugin.data_types.data_type_choice',
-	);
+	public $fixtures = array();
 
 /**
  * Plugin name
@@ -43,15 +41,63 @@ class DataTypesDataTypeFormHelperSelectDataTypesTest extends NetCommonsHelperTes
  */
 	public function setUp() {
 		parent::setUp();
+
+		//テストデータ生成
+		$records = (new DataType4testFixture())->records;
+		$viewVars['dataTypes'] = array(
+			$records[0]['key'] => array('DataType' => $records[0]),
+			$records[1]['key'] => array('DataType' => $records[1]),
+			$records[2]['key'] => array('DataType' => $records[2]),
+		);
+		$requestData = array(
+			'Field' => array('name' => $records[1]['key'])
+		);
+
+		//Helperロード
+		$this->loadHelper('DataTypes.DataTypeForm', $viewVars, $requestData);
 	}
 
 /**
- * indexのテスト
+ * selectDataTypes()のテスト
  *
  * @return void
  */
 	public function testSelectDataTypes() {
-		$this->loadHelper('DataTypes.DataTypeForm', array('dataTypes' => array('aaaa')), array('dataTypes' => array('bbbb')));
+		//テスト実行
 		$result = $this->DataTypeForm->selectDataTypes('Field.name');
+
+		//チェック
+		$records = (new DataType4testFixture())->records;
+		$pattern = '/' . preg_quote('<select name="data[Field][name]" class="form-control" id="FieldName">', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/' . preg_quote('<option value="' . $records[0]['key'] . '">' . $records[0]['name'] . '</option>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+		$pattern = '/' . preg_quote('<option value="' . $records[1]['key'] . '" selected="selected">' . $records[1]['name'] . '</option>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+		$pattern = '/' . preg_quote('<option value="' . $records[2]['key'] . '">' . $records[2]['name'] . '</option>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+	}
+
+/**
+ * selectDataTypes()のテスト($attributes付き)
+ *
+ * @return void
+ */
+	public function testSelectDataTypesWithAttribute() {
+		//テスト実行
+		$result = $this->DataTypeForm->selectDataTypes('Field.name', array('original' => 'test', 'class' => 'original class'));
+
+		//チェック
+		$records = (new DataType4testFixture())->records;
+		$pattern = '/' . preg_quote('<select name="data[Field][name]" class="original class" original="test" id="FieldName">', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/' . preg_quote('<option value="' . $records[0]['key'] . '">' . $records[0]['name'] . '</option>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+		$pattern = '/' . preg_quote('<option value="' . $records[1]['key'] . '" selected="selected">' . $records[1]['name'] . '</option>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+		$pattern = '/' . preg_quote('<option value="' . $records[2]['key'] . '">' . $records[2]['name'] . '</option>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
 	}
 }
