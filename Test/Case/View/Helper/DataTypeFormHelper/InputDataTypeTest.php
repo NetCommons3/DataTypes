@@ -40,18 +40,98 @@ class DataTypesDataTypeFormHelperInputDataTypeTest extends NetCommonsHelperTestC
  */
 	public function setUp() {
 		parent::setUp();
-		//Helperロード
-		$this->loadHelper('DataTypes.DataTypeForm');
 	}
 
 /**
- * inputDataType()のテスト
+ * inputDataType()のテスト(type=text)
  *
  * @return void
  */
 	public function testInputDataType() {
+		//Helperロード
+		$requestData = array(
+			'Model' => array('field' => 'Text value')
+		);
+		$this->loadHelper('DataTypes.DataTypeForm', array(), $requestData);
+
 		//テスト実行
+		$result = $this->DataTypeForm->inputDataType('text', 'Model.field', 'Text type');
 
 		//チェック
+		$pattern = '/' . preg_quote('<label for="ModelField">Text type</label>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/<input ' . preg_quote('name="data[Model][field]"', '/') . '.*?' .
+								preg_quote('type="text" value="Text value" id="ModelField"', '/') . '.*?>/';
+		$this->assertRegExp($pattern, $result);
+	}
+
+/**
+ * inputDataType()のテスト(type=radio)
+ *
+ * @return void
+ */
+	public function testInputDataTypeByRadio() {
+		//Helperロード
+		$requestData = array(
+			'Model' => array('field' => '2')
+		);
+		$this->loadHelper('DataTypes.DataTypeForm', array(), $requestData);
+
+		//テスト実行
+		$result = $this->DataTypeForm->inputDataType('radio', 'Model.field', 'Radio type',
+				array('options' => array('1' => 'value 1', '2' => 'value 2', '3' => 'value 3')));
+
+		//チェック
+		$pattern = '/' . preg_quote('<label for="ModelField">Radio type</label>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/<input ' . preg_quote('type="radio" name="data[Model][field]" id="ModelField1" value="1"', '/') . '.*?>/';
+		$this->assertRegExp($pattern, $result);
+		$pattern = '/' . preg_quote('<label for="ModelField1">value 1</label>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/<input ' . preg_quote('type="radio" name="data[Model][field]" id="ModelField2" value="2" checked="checked"', '/') . '.*?>/';
+		$this->assertRegExp($pattern, $result);
+		$pattern = '/' . preg_quote('<label for="ModelField2">value 2</label>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/<input ' . preg_quote('type="radio" name="data[Model][field]" id="ModelField3" value="3"', '/') . '.*?>/';
+		$this->assertRegExp($pattern, $result);
+		$pattern = '/' . preg_quote('<label for="ModelField3">value 3</label>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+	}
+
+/**
+ * inputDataType()のテスト(type=password)
+ * PasswordTypeTestで実施しているため、ここでは行わない
+ */
+
+/**
+ * inputDataType()のテスト(type=img)
+ * PasswordTypeTestで実施しているため、ここでは行わない
+ */
+
+/**
+ * inputDataType()のテスト(type=label)
+ *
+ * @return void
+ */
+	public function testInputDataTypeByLabel() {
+		//Helperロード
+		$requestData = array(
+			'Model' => array('field' => 'Label value')
+		);
+		$this->loadHelper('DataTypes.DataTypeForm', array(), $requestData);
+
+		//テスト実行
+		$result = $this->DataTypeForm->inputDataType('label', 'Model.field', 'Label type');
+
+		//チェック
+		$pattern = '/' . preg_quote('<label for="ModelField">Label type</label>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/' . preg_quote('<div class="form-control nc-data-label">Label value</div>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
 	}
 }

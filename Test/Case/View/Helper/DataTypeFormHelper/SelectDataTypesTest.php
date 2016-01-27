@@ -50,7 +50,7 @@ class DataTypesDataTypeFormHelperSelectDataTypesTest extends NetCommonsHelperTes
 			$records[2]['key'] => array('DataType' => $records[2]),
 		);
 		$requestData = array(
-			'Field' => array('name' => $records[1]['key'])
+			'Model' => array('field' => $records[1]['key'])
 		);
 
 		//Helperロード
@@ -64,11 +64,11 @@ class DataTypesDataTypeFormHelperSelectDataTypesTest extends NetCommonsHelperTes
  */
 	public function testSelectDataTypes() {
 		//テスト実行
-		$result = $this->DataTypeForm->selectDataTypes('Field.name');
+		$result = $this->DataTypeForm->selectDataTypes('Model.field');
 
 		//チェック
 		$records = (new DataType4testFixture())->records;
-		$pattern = '/' . preg_quote('<select name="data[Field][name]" class="form-control" id="FieldName">', '/') . '/';
+		$pattern = '/' . preg_quote('<select name="data[Model][field]" class="form-control" id="ModelField">', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 
 		$pattern = '/' . preg_quote('<option value="' . $records[0]['key'] . '">' . $records[0]['name'] . '</option>', '/') . '/';
@@ -86,11 +86,11 @@ class DataTypesDataTypeFormHelperSelectDataTypesTest extends NetCommonsHelperTes
  */
 	public function testSelectDataTypesWithAttribute() {
 		//テスト実行
-		$result = $this->DataTypeForm->selectDataTypes('Field.name', array('original' => 'test', 'class' => 'original class'));
+		$result = $this->DataTypeForm->selectDataTypes('Model.field', array('original' => 'test', 'class' => 'original class'));
 
 		//チェック
 		$records = (new DataType4testFixture())->records;
-		$pattern = '/' . preg_quote('<select name="data[Field][name]" class="original class" original="test" id="FieldName">', '/') . '/';
+		$pattern = '/' . preg_quote('<select name="data[Model][field]" class="original class" original="test" id="ModelField">', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 
 		$pattern = '/' . preg_quote('<option value="' . $records[0]['key'] . '">' . $records[0]['name'] . '</option>', '/') . '/';

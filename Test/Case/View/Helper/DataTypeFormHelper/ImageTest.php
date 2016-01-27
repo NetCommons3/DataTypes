@@ -45,13 +45,63 @@ class DataTypesDataTypeFormHelperImageTest extends NetCommonsHelperTestCase {
 	}
 
 /**
+ * image()の評価チェック
+ *
+ * @param string $result 結果
+ * @return void
+ */
+	private function __assertImage($result) {
+		//チェック
+		$pattern = '/' . preg_quote('<label for="ModelField">Image type</label>', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/' . preg_quote('<div class="thumbnail data-type-thumbnail data-type-edit-thumbnail">', '/') . '/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/<img ' . preg_quote('src="http://example.com" class="img-responsive img-rounded" alt="" id="ModelFieldImage"', '/') . '.*?>/';
+		$this->assertRegExp($pattern, $result);
+
+		$pattern = '/<input ' . preg_quote('type="file" name="data[Model][field]" class="" remove="1" filename="1" ' .
+								'data-type-key="image" url="http://example.com" id="ModelField"', '/') . '.*?>/';
+		$this->assertRegExp($pattern, $result);
+	}
+
+/**
  * image()のテスト
  *
  * @return void
  */
 	public function testImage() {
 		//テスト実行
+		$result = $this->DataTypeForm->image('Model.field', 'Image type', array('url' => 'http://example.com'));
 
 		//チェック
+		$this->__assertImage($result);
+	}
+
+/**
+ * image()のテスト(url属性なし)
+ *
+ * @return void
+ */
+	public function testImageNoUrl() {
+		//テスト実行
+		$result = $this->DataTypeForm->image('Model.field', 'Image type');
+
+		//チェック
+		$this->assertEquals('', $result);
+	}
+
+/**
+ * inputDataType()のテスト(type=img)
+ *
+ * @return void
+ */
+	public function testInputDataTypeByImg() {
+		//テスト実行
+		$result = $this->DataTypeForm->inputDataType('img', 'Model.field', 'Image type', array('url' => 'http://example.com'));
+
+		//チェック
+		$this->__assertImage($result);
 	}
 }

@@ -86,6 +86,13 @@ class DataTypeFormComponentBeforeRenderTest extends NetCommonsControllerTestCase
 
 		$expected = array('text', 'textarea', 'radio', 'checkbox', 'select');
 		$this->assertEquals($expected, array_keys($this->vars['dataTypes']));
+
+		//css,scriptのURLチェック
+		$pattern = '/<link.*?' . preg_quote('/data_types/css/style.css', '/') . '.*?>/';
+		$this->assertRegExp($pattern, $this->contents);
+
+		$pattern = '/<script.*?' . preg_quote('/data_types/js/data_types.jquery.js', '/') . '.*?>/';
+		$this->assertRegExp($pattern, $this->contents);
 	}
 
 /**
