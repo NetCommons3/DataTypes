@@ -81,14 +81,10 @@ class DataTypeFormHelper extends AppHelper {
 				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
 				$output .= '</div>';
 
-				$output .= '<div class="form-input-outer">';
-				$output .= '<div class="form-inline">';
-				$output .= $this->NetCommonsForm->radio($fieldName, $options, Hash::merge(array(
-					//'class' => 'form-inline',
-					'separator' => '<span class="radio-separator"></span>'
-				), $attributes));
+				$output .= '<div class="form-input-outer form-inline">';
+				$output .= $this->NetCommonsForm->radio($fieldName, $options, $attributes);
 				$output .= '</div>';
-				$output .= '</div>';
+
 				$output .= '<div class="has-error">';
 				$output .= $this->NetCommonsForm->error($fieldName, null, Hash::merge(array('class' => 'help-block'), $options));
 				$output .= '</div>';
