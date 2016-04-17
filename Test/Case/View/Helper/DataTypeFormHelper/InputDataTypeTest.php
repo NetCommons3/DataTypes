@@ -58,9 +58,6 @@ class DataTypesDataTypeFormHelperInputDataTypeTest extends NetCommonsHelperTestC
 		$result = $this->DataTypeForm->inputDataType('text', 'Model.field', 'Text type');
 
 		//チェック
-		$pattern = '/' . preg_quote('<label for="ModelField">Text type</label>', '/') . '/';
-		$this->assertRegExp($pattern, $result);
-
 		$pattern = '/<input ' . preg_quote('name="data[Model][field]"', '/') . '.*?' .
 								preg_quote('type="text" value="Text value" id="ModelField"', '/') . '.*?>/';
 		$this->assertRegExp($pattern, $result);
@@ -83,22 +80,13 @@ class DataTypesDataTypeFormHelperInputDataTypeTest extends NetCommonsHelperTestC
 				array('options' => array('1' => 'value 1', '2' => 'value 2', '3' => 'value 3')));
 
 		//チェック
-		$pattern = '/' . preg_quote('<label for="ModelField">Radio type</label>', '/') . '/';
-		$this->assertRegExp($pattern, $result);
-
 		$pattern = '/<input ' . preg_quote('type="radio" name="data[Model][field]" id="ModelField1" value="1"', '/') . '.*?>/';
-		$this->assertRegExp($pattern, $result);
-		$pattern = '/' . preg_quote('<label for="ModelField1">value 1</label>', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 
 		$pattern = '/<input ' . preg_quote('type="radio" name="data[Model][field]" id="ModelField2" value="2" checked="checked"', '/') . '.*?>/';
 		$this->assertRegExp($pattern, $result);
-		$pattern = '/' . preg_quote('<label for="ModelField2">value 2</label>', '/') . '/';
-		$this->assertRegExp($pattern, $result);
 
 		$pattern = '/<input ' . preg_quote('type="radio" name="data[Model][field]" id="ModelField3" value="3"', '/') . '.*?>/';
-		$this->assertRegExp($pattern, $result);
-		$pattern = '/' . preg_quote('<label for="ModelField3">value 3</label>', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 	}
 
@@ -128,10 +116,7 @@ class DataTypesDataTypeFormHelperInputDataTypeTest extends NetCommonsHelperTestC
 		$result = $this->DataTypeForm->inputDataType('label', 'Model.field', 'Label type');
 
 		//チェック
-		$pattern = '/' . preg_quote('<label for="ModelField">Label type</label>', '/') . '/';
-		$this->assertRegExp($pattern, $result);
-
-		$pattern = '/' . preg_quote('<div class="form-control nc-data-label">Label value</div>', '/') . '/';
+		$pattern = '/' . preg_quote('<div class="form-input-outer">Label value</div>', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 	}
 }

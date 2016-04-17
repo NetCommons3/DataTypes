@@ -52,9 +52,6 @@ class DataTypesDataTypeFormHelperImageTest extends NetCommonsHelperTestCase {
  */
 	private function __assertImage($result) {
 		//チェック
-		$pattern = '/' . preg_quote('<label for="ModelField">Image type</label>', '/') . '/';
-		$this->assertRegExp($pattern, $result);
-
 		$pattern = '/' . preg_quote('<div class="thumbnail data-type-thumbnail data-type-edit-thumbnail">', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 

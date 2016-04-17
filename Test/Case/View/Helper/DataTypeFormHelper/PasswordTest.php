@@ -55,17 +55,11 @@ class DataTypesDataTypeFormHelperPasswordTest extends NetCommonsHelperTestCase {
 		$pattern = '/' . preg_quote('<div class="data-type-password">', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 
-		$pattern = '/' . preg_quote('<label for="ModelField">Password type</label>', '/') . '/';
-		$this->assertRegExp($pattern, $result);
-
 		$pattern = '/<input ' . preg_quote('name="data[Model][field]" class="form-control"', '/') . '.*?' .
 								preg_quote('type="password" id="ModelField"', '/') . '.*?>/';
 		$this->assertRegExp($pattern, $result);
 
 		$pattern = '/' . preg_quote('<div class="data-type-password data-type-again">', '/') . '/';
-		$this->assertRegExp($pattern, $result);
-
-		$pattern = '/' . preg_quote('<label for="ModelFieldAgain">' . __d('data_types', 'Re-enter') . '</label>', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 
 		$pattern = '/<input ' . preg_quote('name="data[Model][field_again]" class="form-control"', '/') . '.*?' .

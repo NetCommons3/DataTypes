@@ -51,7 +51,9 @@ class DataTypeFormHelper extends AppHelper {
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#options-for-select-checkbox-and-radio-inputs
  */
 	public function selectDataTypes($fieldName, $attributes = array()) {
-		$dataTypes = Hash::combine($this->_View->viewVars['dataTypes'], '{s}.DataType.key', '{s}.DataType.name');
+		$dataTypes = Hash::combine(
+			$this->_View->viewVars['dataTypes'], '{s}.DataType.key', '{s}.DataType.name'
+		);
 		$options = Hash::merge(array(
 			'type' => 'select',
 			'options' => $dataTypes
@@ -86,7 +88,9 @@ class DataTypeFormHelper extends AppHelper {
 				$output .= '</div>';
 
 				$output .= '<div class="has-error">';
-				$output .= $this->NetCommonsForm->error($fieldName, null, Hash::merge(array('class' => 'help-block'), $options));
+				$output .= $this->NetCommonsForm->error($fieldName, null,
+							Hash::merge(array('class' => 'help-block'), $options)
+						);
 				$output .= '</div>';
 				break;
 
