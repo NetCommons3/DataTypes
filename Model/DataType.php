@@ -154,8 +154,9 @@ class DataType extends DataTypesAppModel {
 			$dataTypes[$key][$this->DataTypeChoice->alias] = $choices;
 		}
 
-		if (isset($dataTypes[self::DATA_TYPE_TIMEZONE])) {
-			$dataTypes[self::DATA_TYPE_TIMEZONE][$this->DataTypeChoice->alias] = $this->DataTypeChoice->getTimezone();
+		$typeKey = self::DATA_TYPE_TIMEZONE;
+		if (isset($dataTypes[$typeKey])) {
+			$dataTypes[$typeKey][$this->DataTypeChoice->alias] = $this->DataTypeChoice->getTimezone();
 		}
 
 		return $dataTypes;

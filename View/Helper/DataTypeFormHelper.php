@@ -51,7 +51,9 @@ class DataTypeFormHelper extends AppHelper {
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#options-for-select-checkbox-and-radio-inputs
  */
 	public function selectDataTypes($fieldName, $attributes = array()) {
-		$dataTypes = Hash::combine($this->_View->viewVars['dataTypes'], '{s}.DataType.key', '{s}.DataType.name');
+		$dataTypes = Hash::combine(
+			$this->_View->viewVars['dataTypes'], '{s}.DataType.key', '{s}.DataType.name'
+		);
 		$options = Hash::merge(array(
 			'type' => 'select',
 			'options' => $dataTypes
@@ -81,14 +83,14 @@ class DataTypeFormHelper extends AppHelper {
 				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
 				$output .= '</div>';
 
-				$output .= '<div class="form-control nc-data-label">';
-				$output .= $this->NetCommonsForm->radio($fieldName, $options, Hash::merge(array(
-					'class' => 'form-inline',
-					'separator' => '<span class="radio-separator"></span>'
-				), $attributes));
+				$output .= '<div class="form-input-outer form-inline">';
+				$output .= $this->NetCommonsForm->radio($fieldName, $options, $attributes);
 				$output .= '</div>';
+
 				$output .= '<div class="has-error">';
-				$output .= $this->NetCommonsForm->error($fieldName, null, Hash::merge(array('class' => 'help-block'), $options));
+				$output .= $this->NetCommonsForm->error($fieldName, null,
+							Hash::merge(array('class' => 'help-block'), $options)
+						);
 				$output .= '</div>';
 				break;
 
@@ -102,7 +104,7 @@ class DataTypeFormHelper extends AppHelper {
 
 			case 'label':
 				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
-				$output .= '<div class="form-control nc-data-label">';
+				$output .= '<div class="form-input-outer">';
 				$output .= Hash::get($this->_View->request->data, $fieldName);
 				$output .= '</div>';
 				break;
