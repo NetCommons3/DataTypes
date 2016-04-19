@@ -83,9 +83,9 @@ class DataTypeFormHelper extends AppHelper {
 				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
 				$output .= '</div>';
 
-				$output .= '<div class="form-input-outer form-inline">';
+				$attributes = Hash::insert($attributes, 'outer', true);
+				$attributes = Hash::insert($attributes, 'div', 'form-inline');
 				$output .= $this->NetCommonsForm->radio($fieldName, $options, $attributes);
-				$output .= '</div>';
 
 				$output .= '<div class="has-error">';
 				$output .= $this->NetCommonsForm->error($fieldName, null,
@@ -184,6 +184,7 @@ class DataTypeFormHelper extends AppHelper {
 		$output .= $this->NetCommonsForm->uploadFile($fieldName, Hash::merge(array(
 			'label' => false,
 			'data-type-key' => 'image',
+			'class' => false,
 		), $attributes));
 
 		return $output;
