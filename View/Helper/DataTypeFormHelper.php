@@ -184,7 +184,7 @@ class DataTypeFormHelper extends AppHelper {
 		$output .= $this->NetCommonsForm->uploadFile($fieldName, Hash::merge(array(
 			'label' => false,
 			'data-type-key' => 'image',
-			'class' => false,
+			//'class' => false,
 		), $attributes));
 
 		return $output;

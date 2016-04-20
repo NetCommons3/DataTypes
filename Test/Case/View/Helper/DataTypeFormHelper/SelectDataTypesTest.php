@@ -90,7 +90,7 @@ class DataTypesDataTypeFormHelperSelectDataTypesTest extends NetCommonsHelperTes
 
 		//チェック
 		$records = (new DataType4testFixture())->records;
-		$pattern = '/' . preg_quote('<select name="data[Model][field]" class="original class" original="test" id="ModelField">', '/') . '/';
+		$pattern = '/' . preg_quote('<select name="data[Model][field]" original="test" class="original class" id="ModelField">', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 
 		$pattern = '/' . preg_quote('<option value="' . $records[0]['key'] . '">' . $records[0]['name'] . '</option>', '/') . '/';
