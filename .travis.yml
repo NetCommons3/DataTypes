@@ -9,8 +9,6 @@ php:
 sudo: required
 
 env:
-  - NETCOMMONS_VERSION=master DB=mysql
-env:
   matrix:
     - NETCOMMONS_VERSION=master DB=mysql
   global:
