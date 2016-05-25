@@ -65,94 +65,33 @@ class DataTypeFormHelper extends AppHelper {
 /**
  * データタイプに対するinputタグのHTML出力
  *
- * @param string $dataTypeKey データタイプキー
  * @param string $fieldName フィールド名("Modelname.fieldname"形式)
- * @param string $inputLabel inputラベル名
  * @param array $attributes HTMLタグ属性
- * @return string Completed form widget.
+ * @return string HTML 入力HTML
  */
-	public function inputDataType($dataTypeKey, $fieldName, $inputLabel, $attributes = array()) {
+	public function inputDataType($fieldName, $attributes = array()) {
 		$output = '';
 
-		switch ($dataTypeKey) {
-			case 'radio':
-				$options = $attributes['options'];
-				unset($attributes['options']);
-
-				$output .= '<div>';
-				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
-				$output .= '</div>';
-
-				$attributes = Hash::insert($attributes, 'outer', true);
-				$attributes = Hash::insert($attributes, 'div', 'form-inline');
-				$output .= $this->NetCommonsForm->radio($fieldName, $options, $attributes);
-
-				$output .= '<div class="has-error">';
-				$output .= $this->NetCommonsForm->error($fieldName, null,
-							Hash::merge(array('class' => 'help-block'), $options)
-						);
-				$output .= '</div>';
+		switch ($attributes['type']) {
+			case DataType::DATA_TYPE_IMG:
+				$output .= $this->image($fieldName, $attributes);
 				break;
 
-			case 'password':
-				$output .= $this->password($fieldName, $inputLabel, $attributes);
+			case DataType::DATA_TYPE_PASSWORD:
+				$attributes = Hash::merge(['again' => true], $attributes);
+				$output .= $this->NetCommonsForm->input($fieldName, $attributes);
 				break;
 
-			case 'img':
-				$output .= $this->image($fieldName, $inputLabel, $attributes);
-				break;
-
-			case 'label':
-				$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
-				$output .= '<div class="form-input-outer">';
-				$output .= Hash::get($this->_View->request->data, $fieldName);
-				$output .= '</div>';
+			case DataType::DATA_TYPE_RADIO:
+			case DataType::DATA_TYPE_CHECKBOX:
+				$attributes = Hash::merge(['inline' => true], $attributes);
+				$output .= $this->NetCommonsForm->input($fieldName, $attributes);
 				break;
 
 			default:
-				$output .= $this->NetCommonsForm->input($fieldName, Hash::merge(array(
-					'type' => $dataTypeKey,
-					'label' => $inputLabel,
-				), $attributes));
+				$output .= $this->NetCommonsForm->input($fieldName, $attributes);
 		}
 
-		return $output;
-	}
-
-/**
- * パスワードのHTMLタグの出力
- *
- * @param string $fieldName フィールド名("Modelname.fieldname"形式)
- * @param string $inputLabel ラベル名
- * @param array $attributes HTMLタグ属性
- * @return string パスワードタグ
- */
-	public function password($fieldName, $inputLabel, $attributes = array()) {
-		$output = '';
-		$output .= '<div class="form-group">';
-
-		//パスワード入力フォーム
-		$output .= '<div class="data-type-password">';
-		$output .= $this->NetCommonsForm->input($fieldName, Hash::merge(array(
-				'type' => 'password',
-				'label' => $inputLabel,
-				'div' => false,
-				'autocomplete' => 'off',
-			), $attributes));
-		$output .= '</div>';
-
-		//再入力フォーム
-		$output .= '<div class="data-type-password data-type-again">';
-		$output .= $this->NetCommonsForm->input($fieldName . '_again', Hash::merge(array(
-				'type' => 'password',
-				'label' => __d('data_types', 'Re-enter'),
-				//'class' => 'form-control',
-				//'error' => false,
-				'autocomplete' => 'off',
-			), $attributes));
-		$output .= '</div>';
-
-		$output .= '</div>';
 		return $output;
 	}
 
@@ -160,18 +99,24 @@ class DataTypeFormHelper extends AppHelper {
  * Generates a form input element complete with label and wrapper div
  *
  * @param string $fieldName フィールド名("Modelname.fieldname"形式)
- * @param string $inputLabel ラベル名
  * @param array $attributes HTMLタグ属性
  * @return string imageタグ
  */
-	public function image($fieldName, $inputLabel, $attributes = array()) {
+	public function image($fieldName, $attributes = array()) {
 		$output = '';
 
 		if (! isset($attributes['url'])) {
 			return $output;
 		}
 
-		$output .= $this->NetCommonsForm->label($fieldName, $inputLabel);
+		$label = $attributes['label'];
+		if (Hash::get($attributes, 'required')) {
+			$label .= $this->_View->element('NetCommons.required');
+		}
+		$attributes = Hash::remove($attributes, 'label');
+		$attributes = Hash::remove($attributes, 'required');
+
+		$output .= $this->NetCommonsForm->label($fieldName, $label);
 		$output .= '<div class="thumbnail data-type-thumbnail data-type-edit-thumbnail">';
 
 		$output .= $this->NetCommonsHtml->image($attributes['url'], array(
