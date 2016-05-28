@@ -55,7 +55,11 @@ class DataTypesDataTypeFormHelperInputDataTypeTest extends NetCommonsHelperTestC
 		$this->loadHelper('DataTypes.DataTypeForm', array(), $requestData);
 
 		//テスト実行
-		$result = $this->DataTypeForm->inputDataType('text', 'Model.field', 'Text type');
+		$attributes = array(
+			'type' => 'text',
+			'label' => 'Text type',
+		);
+		$result = $this->DataTypeForm->inputDataType('Model.field', $attributes);
 
 		//チェック
 		$pattern = '/<input ' . preg_quote('name="data[Model][field]"', '/') . '.*?' .
@@ -76,8 +80,12 @@ class DataTypesDataTypeFormHelperInputDataTypeTest extends NetCommonsHelperTestC
 		$this->loadHelper('DataTypes.DataTypeForm', array(), $requestData);
 
 		//テスト実行
-		$result = $this->DataTypeForm->inputDataType('radio', 'Model.field', 'Radio type',
-				array('options' => array('1' => 'value 1', '2' => 'value 2', '3' => 'value 3')));
+		$attributes = array(
+			'type' => 'radio',
+			'label' => 'Radio type',
+			'options' => array('1' => 'value 1', '2' => 'value 2', '3' => 'value 3'),
+		);
+		$result = $this->DataTypeForm->inputDataType('Model.field', $attributes);
 
 		//チェック
 		$pattern = '/<input ' . preg_quote('type="radio" name="data[Model][field]" id="ModelField1" value="1"', '/') . '.*?>/';
@@ -92,12 +100,12 @@ class DataTypesDataTypeFormHelperInputDataTypeTest extends NetCommonsHelperTestC
 
 /**
  * inputDataType()のテスト(type=password)
- * PasswordTypeTestで実施しているため、ここでは行わない
+ * PasswordTestで実施しているため、ここでは行わない
  */
 
 /**
  * inputDataType()のテスト(type=img)
- * PasswordTypeTestで実施しているため、ここでは行わない
+ * ImageTestで実施しているため、ここでは行わない
  */
 
 /**
@@ -113,10 +121,14 @@ class DataTypesDataTypeFormHelperInputDataTypeTest extends NetCommonsHelperTestC
 		$this->loadHelper('DataTypes.DataTypeForm', array(), $requestData);
 
 		//テスト実行
-		$result = $this->DataTypeForm->inputDataType('label', 'Model.field', 'Label type');
+		$attributes = array(
+			'type' => 'label',
+			'label' => 'Label type',
+		);
+		$result = $this->DataTypeForm->inputDataType('Model.field', $attributes);
 
 		//チェック
-		$pattern = '/' . preg_quote('<div class="form-input-outer">Label value</div>', '/') . '/';
+		$pattern = '/' . preg_quote('<div class="form-input-outer form-control">Label value</div>', '/') . '/';
 		$this->assertRegExp($pattern, $result);
 	}
 }

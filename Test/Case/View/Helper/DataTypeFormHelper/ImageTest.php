@@ -58,7 +58,7 @@ class DataTypesDataTypeFormHelperImageTest extends NetCommonsHelperTestCase {
 		$pattern = '/<img ' . preg_quote('src="http://example.com" class="img-responsive img-rounded" alt="" id="ModelFieldImage"', '/') . '.*?>/';
 		$this->assertRegExp($pattern, $result);
 
-		$pattern = '/<input ' . preg_quote('type="file" name="data[Model][field]" class="" remove="1" filename="1" ' .
+		$pattern = '/<input ' . preg_quote('type="file" name="data[Model][field]" class="" ' .
 								'data-type-key="image" url="http://example.com" id="ModelField"', '/') . '.*?>/';
 		$this->assertRegExp($pattern, $result);
 	}
@@ -70,7 +70,11 @@ class DataTypesDataTypeFormHelperImageTest extends NetCommonsHelperTestCase {
  */
 	public function testImage() {
 		//テスト実行
-		$result = $this->DataTypeForm->image('Model.field', 'Image type', array('url' => 'http://example.com'));
+		$attributes = array(
+			'label' => 'Image type',
+			'url' => 'http://example.com',
+		);
+		$result = $this->DataTypeForm->image('Model.field', $attributes);
 
 		//チェック
 		$this->__assertImage($result);
@@ -83,7 +87,10 @@ class DataTypesDataTypeFormHelperImageTest extends NetCommonsHelperTestCase {
  */
 	public function testImageNoUrl() {
 		//テスト実行
-		$result = $this->DataTypeForm->image('Model.field', 'Image type');
+		$attributes = array(
+			'label' => 'Image type',
+		);
+		$result = $this->DataTypeForm->image('Model.field', $attributes);
 
 		//チェック
 		$this->assertEquals('', $result);
@@ -96,7 +103,12 @@ class DataTypesDataTypeFormHelperImageTest extends NetCommonsHelperTestCase {
  */
 	public function testInputDataTypeByImg() {
 		//テスト実行
-		$result = $this->DataTypeForm->inputDataType('img', 'Model.field', 'Image type', array('url' => 'http://example.com'));
+		$attributes = array(
+			'type' => 'img',
+			'label' => 'Image type',
+			'url' => 'http://example.com',
+		);
+		$result = $this->DataTypeForm->inputDataType('Model.field', $attributes);
 
 		//チェック
 		$this->__assertImage($result);

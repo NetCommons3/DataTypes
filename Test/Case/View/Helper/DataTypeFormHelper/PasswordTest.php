@@ -52,32 +52,13 @@ class DataTypesDataTypeFormHelperPasswordTest extends NetCommonsHelperTestCase {
  */
 	private function __assertPassword($result) {
 		//チェック
-		$pattern = '/' . preg_quote('<div class="data-type-password">', '/') . '/';
-		$this->assertRegExp($pattern, $result);
-
 		$pattern = '/<input ' . preg_quote('name="data[Model][field]" class="form-control" autocomplete="off"', '/') . '.*?' .
 								preg_quote('type="password" id="ModelField"', '/') . '.*?>/';
 		$this->assertRegExp($pattern, $result);
 
-		$pattern = '/' . preg_quote('<div class="data-type-password data-type-again">', '/') . '/';
-		$this->assertRegExp($pattern, $result);
-
-		$pattern = '/<input ' . preg_quote('name="data[Model][field_again]" class="form-control" autocomplete="off"', '/') . '.*?' .
+		$pattern = '/<input ' . preg_quote('name="data[Model][field_again]" class="form-control form-input-again" autocomplete="off"', '/') . '.*?' .
 								preg_quote('type="password" id="ModelFieldAgain"', '/') . '.*?>/';
 		$this->assertRegExp($pattern, $result);
-	}
-
-/**
- * password()のテスト
- *
- * @return void
- */
-	public function testPassword() {
-		//テスト実行
-		$result = $this->DataTypeForm->password('Model.field', 'Password type');
-
-		//チェック
-		$this->__assertPassword($result);
 	}
 
 /**
@@ -87,7 +68,11 @@ class DataTypesDataTypeFormHelperPasswordTest extends NetCommonsHelperTestCase {
  */
 	public function testInputDataTypeByPassword() {
 		//テスト実行
-		$result = $this->DataTypeForm->inputDataType('password', 'Model.field', 'Password type');
+		$attributes = array(
+			'type' => 'password',
+			'label' => 'Password type',
+		);
+		$result = $this->DataTypeForm->inputDataType('Model.field', $attributes);
 
 		//チェック
 		$this->__assertPassword($result);
