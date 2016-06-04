@@ -29,20 +29,6 @@ class DataTypeFormHelper extends AppHelper {
 	);
 
 /**
- * Before render callback. beforeRender is called before the view file is rendered.
- *
- * Overridden in subclasses.
- *
- * @param string $viewFile The view file that is going to be rendered
- * @return void
- */
-	public function beforeRender($viewFile) {
-		$this->NetCommonsHtml->css('/data_types/css/style.css');
-		$this->NetCommonsHtml->script('/data_types/js/data_types.jquery.js');
-		parent::beforeRender($viewFile);
-	}
-
-/**
  * データタイプの選択リスト
  *
  * @param string $fieldName フィールド名
