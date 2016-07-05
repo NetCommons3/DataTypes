@@ -88,7 +88,7 @@ class DataTypesTimezoneBehaviorGetTimezoneTest extends NetCommonsCakeTestCase {
 		//チェック
 		$this->assertEquals($expectedCount, count($result));
 
-		$expected = array('key', 'name', 'code', 'language_id');
+		$expected = array('key', 'name', 'code', 'language_id', 'sort');
 		$actual = array_keys(Hash::get(Hash::extract($result, '{n}[key=Asia/Tokyo]'), '0', array()));
 		$this->assertEquals($expected, $actual);
 	}

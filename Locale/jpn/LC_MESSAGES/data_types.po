@@ -18,6 +18,10 @@ msgid "Re-enter"
 msgstr "再入力"
 
 #: DataTypes/Model/Behavior/TimezoneBehavior.php:45
+msgid "(UTC%s)"
+msgstr ""
+
+
 msgid "Africa/Abidjan"
 msgstr "アフリカ／アビジャン"
 
@@ -1267,5 +1271,5 @@ msgid "Pacific/Wallis"
 msgstr "太平洋／ワリス"
 
 msgid "UTC"
-msgstr "協定世界時(UTC)"
+msgstr "協定世界時"
 
