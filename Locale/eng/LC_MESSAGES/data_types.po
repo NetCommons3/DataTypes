@@ -13,11 +13,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: DataTypes/View/Helper/DataTypeFormHelper.php:140
-msgid "Re-enter"
+#: DataTypes/Model/Behavior/TimezoneBehavior.php:45;47
+msgid "(UTC%s)"
 msgstr ""
 
-#: DataTypes/Model/Behavior/TimezoneBehavior.php:45
+#: DataTypes/Model/Behavior/TimezoneBehavior.php:52
 msgid "Africa/Abidjan"
 msgstr "Africa / Abidjan"
 
