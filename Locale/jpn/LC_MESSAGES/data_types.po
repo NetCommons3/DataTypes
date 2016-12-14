@@ -13,15 +13,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: DataTypes/View/Helper/DataTypeFormHelper.php:140
-msgid "Re-enter"
-msgstr "再入力"
-
-#: DataTypes/Model/Behavior/TimezoneBehavior.php:45
+#: DataTypes/Model/Behavior/TimezoneBehavior.php:45;47
 msgid "(UTC%s)"
 msgstr ""
 
-
+#: DataTypes/Model/Behavior/TimezoneBehavior.php:52
 msgid "Africa/Abidjan"
 msgstr "アフリカ／アビジャン"
 
@@ -1272,4 +1268,3 @@ msgstr "太平洋／ワリス"
 
 msgid "UTC"
 msgstr "協定世界時"
-
