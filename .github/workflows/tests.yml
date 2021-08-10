@@ -10,7 +10,7 @@ on:
       - master
       - availability
 
-name: tests
+name: tests 
 
 jobs:
   setup:
